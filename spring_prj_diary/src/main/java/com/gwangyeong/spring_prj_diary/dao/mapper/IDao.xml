@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gwangyeong.spring_prj_diary.dao.IDao">
+	
+	<insert id="signupDao" useGeneratedKeys="true" keyProperty="uNum">
+		insert into USER(uName,uId,uPassword) values(#{param1},#{param2},#{param3})
+		<selectKey resultType="int" keyProperty="uId" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert> 
+	
+	<select id="loginingDao" resultType="com.gwangyeong.spring_prj_diary.dto.loginDto">
+		select uNum from USER where uId = #{param1} and uPassword = #{param2}
+	</select>
+	
+	<select id="allPostDao" resultType="com.gwangyeong.spring_prj_diary.dto.allPostDto">
+		select * from POST
+	</select>
+	
+	<insert id="addPostDao" useGeneratedKeys="true" keyProperty="pNum">
+		insert into POST(pTitle,pContent,pCategory,pUserName) values(#{param1},#{param2},#{param3},#{param4})
+		<selectKey resultType="int" keyProperty="pNum" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert> 
+</mapper>
