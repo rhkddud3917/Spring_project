@@ -26,4 +26,23 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert> 
+	
+	<select id="myPostDao" resultType="com.gwangyeong.spring_prj_diary.dto.allPostDto">
+		select * from POST where pUserName = #{param1}
+	</select>
+	
+	<select id="postViewDao" resultType="com.gwangyeong.spring_prj_diary.dto.postViewDto">
+		select * from POST where pNum= #{param1}
+	</select>
+	
+	<select id="repleViewDao" resultType="com.gwangyeong.spring_prj_diary.dto.repleViewDto">
+		select rContent, rNum, rPostNum, rUserNum, uId from REPLE JOIN USER ON USER.uNum = #{param1} where rPostNum= #{param2}
+	</select>
+	
+	<insert id="addRepleDao" useGeneratedKeys="true" keyProperty="rNum">
+		insert into REPLE(rPostNum,rUserNum,rContent) values(#{param1},#{param2},#{param3})
+		<selectKey resultType="int" keyProperty="rNum" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert> 
 </mapper>

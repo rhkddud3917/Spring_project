@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gwangyeong.spring_prj_diary.dao.IDao;
 import com.gwangyeong.spring_prj_diary.dto.allPostDto;
 import com.gwangyeong.spring_prj_diary.dto.loginDto;
+import com.gwangyeong.spring_prj_diary.dto.postViewDto;
+import com.gwangyeong.spring_prj_diary.dto.repleViewDto;
 
 
 @SessionAttributes("owner")
@@ -86,6 +88,12 @@ public class DController {
 		ArrayList<allPostDto> dtos;
 		dtos = dao.allPostDao();
 		model.addAttribute("dtos",dtos);
+		
+		IDao dao2 = sqlSession.getMapper(IDao.class);
+		ArrayList<allPostDto> dtos2;
+		dtos2 = dao2.myPostDao(uNum);
+		model.addAttribute("dtos2",dtos2);
+		
 		mv.addObject("owner",uNum);
 		mv.setViewName("diaryhome");
 		return mv;
@@ -115,5 +123,44 @@ public class DController {
 		mv.setViewName("redirect:diaryhome");
 		return mv;
 	}
+	
+	@RequestMapping("/postview")
+	public ModelAndView postview(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		int pNum = Integer.parseInt(request.getParameter("pNum"));
+		postViewDto dto = dao.postViewDao(pNum);
+		model.addAttribute("dto",dto);
+		
+		IDao dao2 = sqlSession.getMapper(IDao.class);
+		System.out.println(uNum);
+		System.out.println(pNum);
+		ArrayList<repleViewDto> dtos2 = dao2.repleViewDao(uNum,pNum);
+		model.addAttribute("dtos2",dtos2);
+		
+		mv.addObject("owner",uNum);
+		mv.setViewName("postview");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/addreple")
+	public ModelAndView addreple(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+		
+		ModelAndView mv = new ModelAndView();
+
+		IDao dao = sqlSession.getMapper(IDao.class);
+		int pNum = Integer.parseInt(request.getParameter("pNum"));
+		String rContent = request.getParameter("rContent");
+		dao.addRepleDao(pNum,uNum,rContent);
+		
+		mv.addObject("owner",uNum);
+		mv.setViewName("redirect:postview?pNum="+Integer.toString(pNum));
+		
+		return mv;
+	}
+	
 	
 }
