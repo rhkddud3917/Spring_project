@@ -19,3 +19,15 @@ Through JDBC, this application could be linked with MySQL and Mybais makes it ea
 * By clicking the posts' title they can enter each posts' page. In that page, they can make reple of that post.
 * In downside of the home page, they can see their own posts.
 * By clicking the 'write' button, they can add their posts. and By clicking the 'delete' button, they can erase their own posts 
+
+## Goal
+The ultimate goal is to create a diary service that can match Instagram.
+
+## To Do List
+This application is not finished and nees improvements.
+1. Make 'LIKE' function.
+2. Add verification both in server and client.
+3. Add the grade system for user.
+4. Add some CSS.
+5. Add the function to upload photos or files
+6. Add the neighborhood system.
