@@ -6,8 +6,8 @@
 4. Maven 
 5. Java 
 
-I made this application with Java language. I used Maven for build tool, Tomcat for WAS, MySQL for database and Spring framework.
-Through JDBC, I could link my application with MySQL and Mybais makes it easier.
+This application is made with Java language. Maven is used for build tool, Tomcat is used for WAS, MySQL is used for database and Spring framework is used for project framework.
+Through JDBC, this application could be linked with MySQL and Mybais makes it easier.
 
 ## Introduce
 This application is a diary service.
