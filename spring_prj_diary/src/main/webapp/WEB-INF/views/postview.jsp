@@ -34,7 +34,7 @@
 		<c:forEach items= "${dtos2}" var="dto">
 		<tr>
 			<td>${dto.uId}</td>
-			<td>${dto.rContent }</td>
+			<td>${dto.rContent }</td>			
 		</tr>
 		</c:forEach>
 	</table>

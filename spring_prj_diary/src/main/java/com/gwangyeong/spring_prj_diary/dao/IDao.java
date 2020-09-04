@@ -16,5 +16,6 @@ public interface IDao {
 	public postViewDto postViewDao(int pNum);
 	public ArrayList<repleViewDto> repleViewDao(int uNum,int pNum);
 	public void addRepleDao(int pNum, int uNum, String rContent);
+	public void deletePostDao(int pNum);
 	
 }

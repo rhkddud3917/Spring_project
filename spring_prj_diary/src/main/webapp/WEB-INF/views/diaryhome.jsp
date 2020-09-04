@@ -32,11 +32,18 @@
 		<tr>
 			<td>title</td>
 			<td>content</td>
+			<td>option</td>
 		</tr>
 		<c:forEach items= "${dtos2}" var="dto">
 		<tr>
 			<td>${dto.pTitle}</td>
 			<td>${dto.pContent }</td>
+			<td>
+				<form action="deletepost?pNum=${dto.pNum}" method="post">         
+        			<input type="submit" name="delete" value="delete">
+    			</form>
+    		</td>
+			
 		</tr>
 		</c:forEach>
 		<tr>

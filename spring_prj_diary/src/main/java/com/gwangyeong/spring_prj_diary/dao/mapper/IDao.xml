@@ -45,4 +45,8 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert> 
+	
+	<delete id="deletePostDao">
+		delete from POST where pNum = #{param1}
+	</delete>
 </mapper>

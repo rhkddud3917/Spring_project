@@ -162,5 +162,20 @@ public class DController {
 		return mv;
 	}
 	
+	@RequestMapping("/deletepost")
+	public ModelAndView deletepost(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		int pNum = Integer.parseInt(request.getParameter("pNum"));
+		dao.deletePostDao(pNum);
+		
+		mv.addObject("owner",uNum);
+		mv.setViewName("redirect:diaryhome");
+		
+		return mv;
+	}
+	
 	
 }
