@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="allPostDao" resultType="com.gwangyeong.spring_prj_diary.dto.allPostDto">
-		select * from POST
+		select POST.pNum, POST.pTitle, POST.pContent, CATEGORY.cName from POST JOIN CATEGORY ON POST.pCategory = CATEGORY.cNum
 	</select>
 	
 	<insert id="addPostDao" useGeneratedKeys="true" keyProperty="pNum">
@@ -28,7 +28,7 @@
 	</insert> 
 	
 	<select id="myPostDao" resultType="com.gwangyeong.spring_prj_diary.dto.allPostDto">
-		select * from POST where pUserName = #{param1}
+		select POST.pNum, POST.pTitle, POST.pContent, CATEGORY.cName from POST JOIN CATEGORY ON POST.pCategory = CATEGORY.cNum where pUserName = #{param1}
 	</select>
 	
 	<select id="postViewDao" resultType="com.gwangyeong.spring_prj_diary.dto.postViewDto">

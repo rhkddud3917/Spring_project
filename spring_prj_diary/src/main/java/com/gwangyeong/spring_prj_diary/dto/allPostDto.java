@@ -4,13 +4,15 @@ public class allPostDto {
 	public String pTitle;
 	public String pContent;
 	public int pNum;
+	public String cName;
 	
 	public allPostDto() {}
 	
-	public allPostDto(String pTitle, String pContent, int pNum) {
+	public allPostDto(String pTitle, String pContent, int pNum, String cName) {
 		this.pTitle = pTitle;
 		this.pContent = pContent;
 		this.pNum = pNum;
+		this.cName = cName;
 	}
 	
 	public int getpNum() {
@@ -35,6 +37,14 @@ public class allPostDto {
 
 	public void setpContent(String pContent) {
 		this.pContent = pContent;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 
 	

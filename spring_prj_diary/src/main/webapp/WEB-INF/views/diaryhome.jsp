@@ -16,11 +16,13 @@
 		<tr>
 			<td>title</td>
 			<td>content</td>
+			<td>category</td>
 		</tr>
 		<c:forEach items= "${dtos}" var="dto">
 		<tr>
 			<td><a href="postview?pNum=${dto.pNum}">${dto.pTitle}</a></td>
 			<td>${dto.pContent }</td>
+			<td>${dto.cName}</td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -32,12 +34,14 @@
 		<tr>
 			<td>title</td>
 			<td>content</td>
+			<td>category</td>
 			<td>option</td>
 		</tr>
 		<c:forEach items= "${dtos2}" var="dto">
 		<tr>
 			<td>${dto.pTitle}</td>
 			<td>${dto.pContent }</td>
+			<td>${dto.cName }</td>
 			<td>
 				<form action="deletepost?pNum=${dto.pNum}" method="post">         
         			<input type="submit" name="delete" value="delete">
