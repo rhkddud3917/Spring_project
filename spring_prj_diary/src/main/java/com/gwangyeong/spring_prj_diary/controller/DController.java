@@ -188,5 +188,16 @@ public class DController {
 		return mv;
 	}
 	
+	@RequestMapping("/gotomakediary")
+	public ModelAndView gotomakediary(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("owner",uNum);
+		mv.setViewName("redirect:makeDiaryView");
+		
+		return mv;
+	}
+	
 	
 }

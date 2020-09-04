@@ -51,6 +51,8 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<a href="makeDiaryView">write</a></td>
+	<form action="gotomakediary" method="post">         
+        <input type="submit" name="write" value="write">
+    </form>
 </body>
 </html>
