@@ -50,9 +50,7 @@
 			
 		</tr>
 		</c:forEach>
-		<tr>
-			<td colspan="5"> <a href="makeDiaryView">write diary</a></td>
-		</tr>
 	</table>
+	<a href="makeDiaryView">write</a></td>
 </body>
 </html>

@@ -177,5 +177,16 @@ public class DController {
 		return mv;
 	}
 	
+	@RequestMapping("/backtodiaryhome")
+	public ModelAndView backtodiaryhome(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("owner",uNum);
+		mv.setViewName("redirect:diaryhome");
+		
+		return mv;
+	}
+	
 	
 }

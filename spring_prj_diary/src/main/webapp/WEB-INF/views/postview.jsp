@@ -46,5 +46,8 @@
     	<textarea name="rContent" cols="40" rows="8"></textarea><br>
         <input type="submit" name="reple" value="reple"/>
     </form>
+    <form action="backtodiaryhome" method="post">         
+        <input type="submit" name="home" value="home">
+    </form>
 </body>
 </html>
