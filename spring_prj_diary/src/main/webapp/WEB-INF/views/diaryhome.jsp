@@ -39,7 +39,7 @@
 		</tr>
 		<c:forEach items= "${dtos2}" var="dto">
 		<tr>
-			<td>${dto.pTitle}</td>
+			<td><a href="postview?pNum=${dto.pNum}">${dto.pTitle}</a></td>
 			<td>${dto.pContent }</td>
 			<td>${dto.cName }</td>
 			<td>
