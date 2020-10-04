@@ -6,7 +6,7 @@
 4. Maven 
 5. Java 
 
-This application is made with Java language. Maven is used for build tool, Tomcat is used for WAS, MySQL is used for database and Spring framework is used for project framework.
+This application is made with Java language. Maven is used for build tool, Tomcat is used as WAS, MySQL is used for database and Spring framework is used for project framework.
 Through JDBC, this application could be linked with MySQL and Mybais makes it easier.
 
 ## Introduce
