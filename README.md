@@ -31,3 +31,4 @@ This application is not finished and nees improvements.
 4. Add some CSS.
 5. Add the function to upload photos or files
 6. Add the neighborhood system.
+7. Remove the code that does not necessary
