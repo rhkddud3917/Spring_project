@@ -21,7 +21,7 @@ Through JDBC, this application could be linked with MySQL and Mybais makes it ea
 * By clicking the 'write' button, they can add their posts. and By clicking the 'delete' button, they can erase their own posts 
 
 ## Goal
-The ultimate goal is to create a diary service that can match Instagram.
+The ultimate goal is to create a diary service that can match with Instagram.
 
 ## To Do List
 This application is not finished and nees improvements.
