@@ -99,13 +99,13 @@ public class DController {
 		return mv;
 	}
 	
-	@RequestMapping("/makeDiaryView")
-	public String makeDiaryView(Model model) {
-		return "makeDiary";
+	@RequestMapping("/makediaryview")
+	public String makediaryview(Model model) {
+		return "makediary";
 	}
 	
-	@RequestMapping("/makeDiary")
-	public ModelAndView makeDiary(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/makediary")
+	public ModelAndView makediary(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -194,7 +194,7 @@ public class DController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("owner",uNum);
-		mv.setViewName("redirect:makeDiaryView");
+		mv.setViewName("redirect:makediaryview");
 		
 		return mv;
 	}
