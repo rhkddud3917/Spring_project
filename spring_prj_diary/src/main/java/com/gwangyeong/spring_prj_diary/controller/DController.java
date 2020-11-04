@@ -30,45 +30,50 @@ public class DController {
 	private SqlSession sqlSession;
 	
 	
-	@RequestMapping("/loginview")
-	public String loginview(Model model) {
-		return "loginview";
+	@RequestMapping("/login_page")
+	public String login_page(Model model) {
+		return "login_page";
 	}
 	
-	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/choosing")
-	public ModelAndView choosing(HttpServletRequest request, Model model) {
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/login_or_signup")
+	public ModelAndView login_or_signup(HttpServletRequest request, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
 		String choose = request.getParameter("choose");
-		System.out.println(choose);
+		
 		if (choose.equals("log-in")) {
+			
 			IDao dao = sqlSession.getMapper(IDao.class);
 			String uId = request.getParameter("id");
 			int uPassword = Integer.parseInt(request.getParameter("password"));
-			loginDto res = dao.loginingDao(uId,uPassword);
-			if (res == null) {
-				mv.setViewName("loginfail");
+			
+			loginDto user_info = dao.loginingDao(uId,uPassword);
+			
+			if (user_info == null) {
+				mv.setViewName("loginfail_page");
 				return mv;
 			}
 			else {
-				mv.addObject("owner",res.uNum);
-				mv.setViewName("redirect:diaryhome");
+				mv.addObject("owner",user_info.uNum);
+				mv.setViewName("redirect:entire_diary_page");
 				return mv;
 			}
 		}
 		else {
-			mv.setViewName("signup");
+			mv.setViewName("signup_page");
 			return mv;
 		}
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/signing")
-	public String signing(HttpServletRequest request, Model model) {
+	@RequestMapping(method=RequestMethod.POST, value="/making_account")
+	public String making_account(HttpServletRequest request, Model model) {
 		
 		model.addAttribute("request",request);
+		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		Map<String, Object> map = model.asMap();
+		
 		request = (HttpServletRequest) map.get("request");
 	
 		String uName = request.getParameter("name");
@@ -76,125 +81,121 @@ public class DController {
 		int uPassword = Integer.parseInt(request.getParameter("password"));
 		
 		dao.signupDao(uName, uId, uPassword);
-		return "loginview";
+		return "login_page";
 	}
 	
-	@RequestMapping("/diaryhome")
-	public ModelAndView diaryhome(@ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/entire_diary_page")
+	public ModelAndView entire_diary_page(@ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		IDao dao = sqlSession.getMapper(IDao.class);
-		ArrayList<allPostDto> dtos;
-		dtos = dao.allPostDao();
-		model.addAttribute("dtos",dtos);
+		IDao get_entire_posts = sqlSession.getMapper(IDao.class);
+		ArrayList<allPostDto> entire_posts;
+		entire_posts = get_entire_posts.allPostDao();
+		model.addAttribute("entire_posts",entire_posts);
 		
-		IDao dao2 = sqlSession.getMapper(IDao.class);
-		ArrayList<allPostDto> dtos2;
-		dtos2 = dao2.myPostDao(uNum);
-		model.addAttribute("dtos2",dtos2);
+		IDao get_my_posts = sqlSession.getMapper(IDao.class);
+		ArrayList<allPostDto> my_posts;
+		my_posts = get_my_posts.myPostDao(uNum);
+		model.addAttribute("my_posts",my_posts);
 		
 		mv.addObject("owner",uNum);
-		mv.setViewName("diaryhome");
+		mv.setViewName("entire_diary_page");
 		return mv;
 	}
 	
-	@RequestMapping("/makediaryview")
-	public String makediaryview(Model model) {
-		return "makediary";
+	@RequestMapping("/make_post_page")
+	public String make_post_page(Model model) {
+		return "making_post";
 	}
 	
-	@RequestMapping("/makediary")
-	public ModelAndView makediary(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/making_post")
+	public ModelAndView making_post(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		IDao dao = sqlSession.getMapper(IDao.class);
+		IDao post_info = sqlSession.getMapper(IDao.class);
 	
 		String pTitle = request.getParameter("title");
 		String pContent = request.getParameter("content");
-		System.out.println(pTitle);
 		int pCategory = Integer.parseInt(request.getParameter("category"));
 		int pUserNum = uNum;
-		System.out.println(pUserNum);
 		
-		dao.addPostDao(pTitle, pContent, pCategory, pUserNum);
+		post_info.addPostDao(pTitle, pContent, pCategory, pUserNum);
 		mv.addObject("owner",uNum);
-		mv.setViewName("redirect:diaryhome");
+		mv.setViewName("redirect:entire_diary_page");
 		return mv;
 	}
 	
-	@RequestMapping("/postview")
-	public ModelAndView postview(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/post_page")
+	public ModelAndView post_page(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		IDao dao = sqlSession.getMapper(IDao.class);
+		IDao get_post_info = sqlSession.getMapper(IDao.class);
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
-		postViewDto dto = dao.postViewDao(pNum);
-		model.addAttribute("dto",dto);
+		postViewDto post_info = get_post_info.postViewDao(pNum);
+		model.addAttribute("post_info",post_info);
 		
-		IDao dao2 = sqlSession.getMapper(IDao.class);
-		System.out.println(uNum);
-		System.out.println(pNum);
-		ArrayList<repleViewDto> dtos2 = dao2.repleViewDao(uNum,pNum);
-		model.addAttribute("dtos2",dtos2);
+		IDao get_reple_info = sqlSession.getMapper(IDao.class);
+		ArrayList<repleViewDto> reple_info = get_reple_info.repleViewDao(uNum,pNum);
+		model.addAttribute("reple_info",reple_info);
 		
 		mv.addObject("owner",uNum);
-		mv.setViewName("postview");
+		mv.setViewName("post_page");
 		
 		return mv;
 	}
 	
-	@RequestMapping("/addreple")
-	public ModelAndView addreple(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/making_reple")
+	public ModelAndView making_reple(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 
-		IDao dao = sqlSession.getMapper(IDao.class);
+		IDao reple_info = sqlSession.getMapper(IDao.class);
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
 		String rContent = request.getParameter("rContent");
-		dao.addRepleDao(pNum,uNum,rContent);
+		reple_info.addRepleDao(pNum,uNum,rContent);
 		
 		mv.addObject("owner",uNum);
-		mv.setViewName("redirect:postview?pNum="+Integer.toString(pNum));
+		mv.setViewName("redirect:post_page?pNum="+Integer.toString(pNum));
 		
 		return mv;
 	}
 	
-	@RequestMapping("/deletepost")
-	public ModelAndView deletepost(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/deleting_post")
+	public ModelAndView deleting_post(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		IDao dao = sqlSession.getMapper(IDao.class);
+		IDao post_info = sqlSession.getMapper(IDao.class);
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
-		dao.deletePostDao(pNum);
+		post_info.deletePostDao(pNum);
 		
 		mv.addObject("owner",uNum);
-		mv.setViewName("redirect:diaryhome");
+		mv.setViewName("redirect:entire_diary_page");
 		
 		return mv;
 	}
 	
-	@RequestMapping("/backtodiaryhome")
-	public ModelAndView backtodiaryhome(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/going_entire_diary_page")
+	public ModelAndView going_entire_diary_page(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("owner",uNum);
-		mv.setViewName("redirect:diaryhome");
+		mv.setViewName("redirect:entire_diary_page");
 		
 		return mv;
 	}
 	
-	@RequestMapping("/gotomakediary")
-	public ModelAndView gotomakediary(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
+	@RequestMapping("/going_make_post")
+	public ModelAndView going_make_post(HttpServletRequest request, @ModelAttribute("owner") int uNum, Model model) {
 		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("owner",uNum);
-		mv.setViewName("redirect:makediaryview");
+		mv.setViewName("redirect:make_post_page");
 		
 		return mv;
 	}

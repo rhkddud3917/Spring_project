@@ -18,7 +18,7 @@
 			<td>content</td>
 			<td>category</td>
 		</tr>
-		<c:forEach items= "${dtos}" var="dto">
+		<c:forEach items= "${entire_posts}" var="dto">
 		<tr>
 			<td><a href="postview?pNum=${dto.pNum}">${dto.pTitle}</a></td>
 			<td>${dto.pContent }</td>
@@ -37,13 +37,13 @@
 			<td>category</td>
 			<td>option</td>
 		</tr>
-		<c:forEach items= "${dtos2}" var="dto">
+		<c:forEach items= "${my_posts}" var="dto">
 		<tr>
-			<td><a href="postview?pNum=${dto.pNum}">${dto.pTitle}</a></td>
+			<td><a href="post_page?pNum=${dto.pNum}">${dto.pTitle}</a></td>
 			<td>${dto.pContent }</td>
 			<td>${dto.cName }</td>
 			<td>
-				<form action="deletepost?pNum=${dto.pNum}" method="post">         
+				<form action="deleting_post?pNum=${dto.pNum}" method="post">         
         			<input type="submit" name="delete" value="delete">
     			</form>
     		</td>
@@ -51,7 +51,7 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<form action="gotomakediary" method="post">         
+	<form action="going_make_post" method="post">         
         <input type="submit" name="write" value="write">
     </form>
 </body>

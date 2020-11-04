@@ -8,7 +8,7 @@
 </head>
 <body>
 	
-	<form action="signing" method="post"> 
+	<form action="making_account" method="post"> 
 		[name] <input type="text" name="name"><br>        
     	[    id    ] <input type="text" name="id"><br>
         [ password ] <input type="number" name="password"><br>

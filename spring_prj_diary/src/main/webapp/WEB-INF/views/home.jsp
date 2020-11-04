@@ -11,7 +11,7 @@
 
 	<P>  Enjoy your diary  </P>
 	
-	<form action="loginview" method="post">
+	<form action="login_page" method="post">
 		<input type="submit" name="choose" value="START">
 	</form>
 	

@@ -18,8 +18,8 @@
 			<td>content</td>
 		</tr>
 		<tr>
-			<td>${dto.pTitle}</td>
-			<td>${dto.pContent }</td>
+			<td>${post_info.pTitle}</td>
+			<td>${post_info.pContent }</td>
 		</tr>
 	</table>
 	
@@ -31,7 +31,7 @@
 			<td>user</td>
 			<td>content</td>
 		</tr>
-		<c:forEach items= "${dtos2}" var="dto">
+		<c:forEach items= "${reple_info}" var="dto">
 		<tr>
 			<td>${dto.uId}</td>
 			<td>${dto.rContent }</td>			
@@ -42,11 +42,11 @@
 	<h2>
 		WRITE REPLE
 	</h2>
-	<form action="addreple?pNum=${dto.pNum}" method="post">         
+	<form action="making_reple?pNum=${dto.pNum}" method="post">         
     	<textarea name="rContent" cols="40" rows="8"></textarea><br>
         <input type="submit" name="reple" value="reple"/>
     </form>
-    <form action="backtodiaryhome" method="post">         
+    <form action="going_entire_diary_page" method="post">         
         <input type="submit" name="home" value="home">
     </form>
 </body>

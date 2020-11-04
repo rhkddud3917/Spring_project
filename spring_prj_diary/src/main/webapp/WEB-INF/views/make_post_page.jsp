@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="makediary" method="post"> 
+	<form action="making_post" method="post"> 
 		[Title] <input type="text" name="title"><br>        
     	[Content] <textarea name="content" cols="40" rows="8"></textarea><br>
         [Category]
