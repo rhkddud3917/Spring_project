@@ -20,7 +20,7 @@
 		</tr>
 		<c:forEach items= "${entire_posts}" var="dto">
 		<tr>
-			<td><a href="postview?pNum=${dto.pNum}">${dto.pTitle}</a></td>
+			<td><a href="post_page?pNum=${dto.pNum}">${dto.pTitle}</a></td>
 			<td>${dto.pContent }</td>
 			<td>${dto.cName}</td>
 		</tr>
