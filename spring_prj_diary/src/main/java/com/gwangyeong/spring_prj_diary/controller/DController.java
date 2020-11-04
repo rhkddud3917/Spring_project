@@ -40,26 +40,32 @@ public class DController {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		//choose login or signup
 		String choose = request.getParameter("choose");
 		
+		//login process
 		if (choose.equals("log-in")) {
 			
-			IDao dao = sqlSession.getMapper(IDao.class);
+			IDao get_user_info = sqlSession.getMapper(IDao.class);
+			
 			String uId = request.getParameter("id");
 			int uPassword = Integer.parseInt(request.getParameter("password"));
 			
-			loginDto user_info = dao.loginingDao(uId,uPassword);
+			loginDto user_info = get_user_info.loginingDao(uId,uPassword);
 			
+			//there is no login info - login fail
 			if (user_info == null) {
 				mv.setViewName("loginfail_page");
 				return mv;
 			}
+			//login success
 			else {
 				mv.addObject("owner",user_info.uNum);
 				mv.setViewName("redirect:entire_diary_page");
 				return mv;
 			}
 		}
+		//signup process
 		else {
 			mv.setViewName("signup_page");
 			return mv;
@@ -89,11 +95,13 @@ public class DController {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		//entire posts
 		IDao get_entire_posts = sqlSession.getMapper(IDao.class);
 		ArrayList<allPostDto> entire_posts;
 		entire_posts = get_entire_posts.allPostDao();
 		model.addAttribute("entire_posts",entire_posts);
 		
+		//my posts
 		IDao get_my_posts = sqlSession.getMapper(IDao.class);
 		ArrayList<allPostDto> my_posts;
 		my_posts = get_my_posts.myPostDao(uNum);
@@ -124,6 +132,7 @@ public class DController {
 		post_info.addPostDao(pTitle, pContent, pCategory, pUserNum);
 		mv.addObject("owner",uNum);
 		mv.setViewName("redirect:entire_diary_page");
+		
 		return mv;
 	}
 	
@@ -132,11 +141,13 @@ public class DController {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		//post info
 		IDao get_post_info = sqlSession.getMapper(IDao.class);
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
 		postViewDto post_info = get_post_info.postViewDao(pNum);
 		model.addAttribute("post_info",post_info);
 		
+		//reple info
 		IDao get_reple_info = sqlSession.getMapper(IDao.class);
 		ArrayList<repleViewDto> reple_info = get_reple_info.repleViewDao(uNum,pNum);
 		model.addAttribute("reple_info",reple_info);
