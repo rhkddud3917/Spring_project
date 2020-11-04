@@ -106,7 +106,7 @@ public class DController {
 	
 	@RequestMapping("/make_post_page")
 	public String make_post_page(Model model) {
-		return "making_post";
+		return "make_post_page";
 	}
 	
 	@RequestMapping("/making_post")
